@@ -15,6 +15,9 @@
 ### 假设情景
 
 一个宝可梦，可以睡觉，吃饭，放技能；如果要扩展它的行为，比如Mega进化后，假设有专属的Mega技能，然后极巨化，可以放极巨技能。
+如果用继承的方法实现代码，那么每种宝可梦不都得写对应的Mega类和极巨化类？当发现一种新宝可梦的时候，那又得增加对应的子类，比较繁琐。
+那么就可以定义一个装饰器接口，以便对新的变化进行扩展，比如太晶化。通过实现装饰器接口，构造函数中包含需要被装饰的宝可梦，就实现了解耦。
+不管你是新的宝可梦也好，还是旧的1000+种也好，我只需要写一个具体的实现类，这个实现类中可以通过super执行原有的方法，也可以扩展专属的装饰方法。
 
 ![image](https://github.com/PocketSWPU/DesignPatternsButPokemon/assets/107466625/c04c0fe4-8c17-4533-9e1c-a8483053b7d4)
 
@@ -71,7 +74,7 @@ public class Chikorita implements Pokemon{
 }
 ```
 
-**宝可梦变化装饰器：**抽象装饰（Decorator）
+**宝可梦变化装饰器** ：抽象装饰（Decorator）
 
 用抽象类方便扩展多种装饰，以应对宝可梦可能有的多种变化
 
@@ -100,7 +103,7 @@ abstract class PokemonDecorator implements Pokemon{
 }
 ```
 
-**宝可梦具体变化：**具体装饰（Concrete Decorator）
+**宝可梦具体变化** ：具体装饰（Concrete Decorator）
 
 实现了Mega进化和极巨化两种变化
 
