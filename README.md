@@ -10,3 +10,4 @@
 
 ## 行为型模式
 - [观察者模式](https://github.com/PocketSWPU/DesignPatternsButPokemon/tree/main/src/BehavioralPatterns/observer)
+- [责任链模式](https://github.com/PocketSWPU/DesignPatternsButPokemon/tree/main/src/BehavioralPatterns/chainOfResponsibility)
