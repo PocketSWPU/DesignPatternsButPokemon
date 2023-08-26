@@ -1,4 +1,4 @@
-## 适配器模式
+# 适配器模式
 
 意图：将一个类的接口转换成客户希望的另一个接口
 
@@ -14,7 +14,7 @@
 - 适配者类：被适配的现有组件的接口
 - 适配器类：一个转换器，继承或引用适配者对象，把适配者接口转为目标接口
 
-### 1 情景假设
+## 1 情景假设
 
 现在我们假设这样一个场景：小智在绿宝石的存档中，有一只巨tm强的裂空座，性格好，个体高，努力值也刷得完美。现在已经发售了朱紫，他还想用这只裂空座，但是问题来了，绿宝石是GBA主机的游戏，朱紫是Switch主机的游戏，他们存储数据的格式不同啊！这怎么办呢？那么就只能推出一个适配器，把GBA的数据转化成Switch的数据，把裂空座从绿宝石移植到朱紫，可能熟悉宝可梦游戏的朋友已经想到了，Pokemon Home就是干这个事的，所以我们可以把这个故事中的角色抽象为适配器模式需要的三个角色：
 
@@ -27,7 +27,7 @@
 
 
 
-### 2 代码示例
+## 2 代码示例
 
 ![image](https://github.com/PocketSWPU/DesignPatternsButPokemon/assets/107466625/52b658fd-d89e-42d5-90d7-ea201a6dba46)
 
@@ -145,9 +145,44 @@ Go! Rayquaza! (In Switch Version)
 Go! Chikorita (Get In Scarlet Version)
 ```
 
+## 3 应用
+> 2023/08/26 更新
 
+在学习多线程八股文的时候，新了解了`FutureTask`类。关于这个类的作用，不在本文中赘述。
 
-### 3 另一个例子
+`FutureTask`类有2个构造方法：
+```java
+class FutureTask{
+    private Callable<V> callable;
+    
+    public FutureTask(Callable<V> callable) {
+        if (callable == null)
+        throw new NullPointerException();
+        this.callable = callable;
+        this.state = NEW;       // ensure visibility of callable
+        }
+
+    public FutureTask(Runnable runnable, V result) {
+        this.callable = Executors.callable(runnable, result);
+        this.state = NEW;       // ensure visibility of callable
+        }
+}
+    
+    
+```
+可见，`FutureTask`的构造方法参数可以是`Callable`也可以是`Runnable`的实现类，然而，在传入`Runnable`实现类时，
+还是对变量`callable`赋值，这是一个`Callable`对象。所以，无论传入什么，最终都变成了`Callable`。
+点进`Executors.callable()`:
+```java
+public static <T> Callable<T> callable(Runnable task, T result) {
+        if (task == null)
+            throw new NullPointerException();
+        return new RunnableAdapter<T>(task, result);
+    }
+```
+可以看到一个`RunnableAdapter`, 一个适配器类，传入Runnable，得到的是继承了`Callable`接口的适配器对象。
+
+## 4 另一个例子
 
 题外话，在学习这个设计模式的时候想到的，在做机器学习的时候，通常有这么个流程：
 
