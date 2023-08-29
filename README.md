@@ -3,6 +3,9 @@
 
 待更新...
 
+## 创建型模式
+- [建造者模式](https://github.com/PocketSWPU/DesignPatternsButPokemon/tree/main/src/creatingPatterns/builder)
+
 ## 结构型模式
 -  [装饰器模式](https://github.com/PocketSWPU/DesignPatternsButPokemon/tree/main/src/structuralPatterns/decorator)
 -  [适配器模式](https://github.com/PocketSWPU/DesignPatternsButPokemon/tree/main/src/structuralPatterns/adapter)
